@@ -1,28 +1,11 @@
-// Listagem de um Subject Único por ID
+import { Request, Response } from 'express'
+import subjectListByIdService from '../../services/subject/subjectListById.service'
 
-// GET - /subjects/:subject_id
+const subjectListByIdController = async (req: Request, res: Response) => {
+    const {subject_id} = req.params
+    const subjectListById = await subjectListByIdService(subject_id)
 
-// Exemplo de Requisição
+    return res.status(200).json(subjectListById)
+}
 
-// GET - /subjects/835db4ca-8a2e-4be5-887e-65345b0c73b6
-
-// Corpo da Requisição 
-
-// Vazio
-
-// Exemplo de Resposta
-
-// 200 - OK
-// {
-//     "id":
-//     "name":
-//     "weekly_hours":
-//     "students": [
-//         {
-//             "id": "19b5afbc-6849-47f8-928b-4cfc08ec3ce3",
-//             "name": "Exemplo",
-//             "age": 23,
-//             "phone": 12345678
-//         }
-//     ]
-// }
+export default subjectListByIdController

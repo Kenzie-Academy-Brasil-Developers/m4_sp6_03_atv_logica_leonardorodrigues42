@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from "typeorm";
 import { v4 as uuid } from 'uuid'
+import { Student } from "./student.entity";
 
 @Entity()
 export class Subject {
@@ -12,6 +13,10 @@ export class Subject {
 
     @Column('int')
     weekly_hours: number
+
+    @ManyToMany(() => Student)
+    @JoinTable()
+    students: Student[]
 
     constructor() {
         if (!this.id) {

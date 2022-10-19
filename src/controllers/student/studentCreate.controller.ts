@@ -1,31 +1,13 @@
-// Criação de um Student
+import { Request, Response } from "express";
+import studantCreteService from "../../services/student/studentCreate.service";
 
-// POST - /students/
+const studentCreateController = async (req: Request, res: Response) => {
+    console.log("hello")
+    const {name, age, phone} = req.body
 
-// Exemplo de requisição
+    const createdStudent  = await studantCreteService(name, age, phone)
 
-// POST - /students/
+    return res.status(201).json(createdStudent)
+}
 
-// Corpo da Requisição
-
-// {
-//     "name": "Exemplo",
-//     "age": 21,
-//     "phone": 12345678
-// }
-
-// Exemplo de Resposta
-
-// 201 - Created
-// {
-//     "id": "835db4ca-8a2e-4be5-887e-65345b0c73b6",
-//     "name": "Exemplo",
-//     "age": 21,
-//     "phone": 12345678
-// }
-
-// Casos de Erro
-// 409 - Conflict - "Student already registered"
-// Ao tentar adicionar um Student com um nome já registrado na DB
-
-
+export default studentCreateController
